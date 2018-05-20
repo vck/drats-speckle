@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>diabetic rats analyzing tools (drats)</title>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.css')}}">
+  <script type="text/javascript" src="{{url_for('static', filename='jquery.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='bootstrap.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='jquery.flot.js')}}"></script>
+</head>
+<body>
+
+  <div class="container" style="padding-top: 20px; padding-left: 40px; padding-bottom: 50px;">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">DRATS</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/">Capture</a></li>
+              <li><a href="/csv-file">Database</a></li>
+              <li><a href="/images">Images</a></li>
+              <li><a href="/show">Statistics</a></li>
+            </ul>
+            
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+  	<h3 class="text-center">database drats</h3>
+
+  	{%if images%}
+  	   {%for file in images%}
+           <img src="/{{file}}">
+           <br>
+  	   {%endfor%}
+    {%else%}
+       <h3>tidak ada file terbaru!</h3>
+  	{%endif%}
+
+  </div>
+
+</body>
+</html>

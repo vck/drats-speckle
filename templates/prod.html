@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>diabetic rats analyzing tools (drats)</title>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.css')}}">
+  <script type="text/javascript" src="{{url_for('static', filename='jquery.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='bootstrap.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='jquery.flot.js')}}"></script>
+</head>
+<body>
+
+  <div class="container" style="padding-top: 20px; padding-left: 40px; padding-bottom: 50px;">
+    <h3 class="text-center text-bold">Diabetic Rats Analyzing Tools</h3>
+
+    <div class="jumbotron">
+      <h4>File: {{filename}}</h4>
+      <h4>Total speckle: {{num_blob}}</h4>
+      <h4>Min: {{minx}}</h4>
+      <h4>Max: {{maxx}}</h4>
+      <h4>STD: {{std}}</h4>
+      <h4>Mean: {{mean}}</h4>
+    </div>
+
+    <form class="form-inline" action="/" method="post" enctype="multipart/form-data">
+      <input class="btn btn-default" type="submit" value="capture" method="post" action="/">
+    </form>
+
+
+    <div class="chart">
+      <div id="fft"></div>
+    </div>
+    
+    <h3 class="text-center">Histogram</h3>
+    <div id="placeholder" style="width:1130px;height:450px"></div>
+
+    <h3 class="text-center">Intensitas vs Jumlah Speckle</h3>
+    <div id="intensitas" style="width:1130px;height:450px"></div>
+
+    <h3 style="padding-left: 20px;" class="btn btn-default" type="submit">plot intensitas</h3>
+    </div>
+
+    
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+
+    $(function() {
+
+    var fft = [];
+
+
+    {%if fft_data%}
+      data = {{fft_data | safe}}
+       for (var i = 0; i < data.length; i++) {
+          fft.push([i, data[i]]);
+       }
+       
+       $.plot($("#placeholder"), [ fft ], { yaxis: { max: fft.length } });
+
+    {%else%}
+
+       $.plot($("#placeholder"), [ [[0, 0], [0, 0], [0, 0]] ], { yaxis: { max: 250 } });       
+    {%endif%}
+       
+   
+  })
+ 
+  </script>
+
+</body>
+</html>
